@@ -8,7 +8,10 @@
       <!-- <a-camera 
       position="10 5 10"
       ></a-camera> -->
-      <a-camera position="0 6 6"></a-camera>
+      <a-entity id="rig">
+        <a-entity camera look-controls wasd-controls position="5 4.8 7.53">
+        </a-entity>
+      </a-entity>
 
       <a-assets>
         <a-asset-item id="plant1" src="./asset/plant1.glb"></a-asset-item>
