@@ -26,6 +26,14 @@
                 color="#FFFFFF"
                 visible="false">
               </a-text>
+              <a-text 
+                id="cameraTexthexa"
+                value="Le pouvoir est un outil. Encore faut-il savoir qui le controle."
+                position="-.5 0 -1" 
+                scale="0.15 0.15 0.15"
+                color="#FFFFFF"
+                visible="false">
+              </a-text>
           </a-entity>
   
           <a-entity
@@ -42,11 +50,13 @@
         </a-entity>
   
         <a-assets>
-          <img id="bg1" src="./asset/bg/bg1.svg"></img>
-          <a-asset-item id="test" src="./asset/wizardtable.glb"></a-asset-item>
-          <a-asset-item id="salle" src="./asset/scool.glb"></a-asset-item>
+          <a-asset-item id="room" src="./asset/sallereal.glb"></a-asset>
           <a-asset-item id="hexa" src="./asset/hexatex.glb"></a-asset-item>
+          <a-asset-item id="hexacote" src="./asset/hexacote.glb"></a-asset-item>
           <a-asset-item id="shimmer" src="./asset/shimmer.glb"></a-asset-item>
+          <a-asset-item id="jinxcote" src="./asset/jinxcote.glb"></a-asset-item>
+          <a-asset-item id="chair" src="./asset/chair.glb"></a-asset-item>
+          <a-asset-item id="desk" src="./asset/bureau.glb"></a-asset-item>
           <a-asset-item id="flopnavmesh" src="./asset/navmesh.glb"></a-asset-item>
         </a-assets>
 
@@ -64,6 +74,36 @@
           scale="1 1 1"
           visible="false">
         </a-entity>
+
+        <a-entity
+          gltf-model="#room"
+          position="0 0 -3"
+          rotation="0 -90 0"
+          scale="1 1 1"></a-entity>
+
+          <a-entity
+          gltf-model="#desk"
+          position="0 0 -3"
+          rotation="0 -90 0"
+          scale="1 1 1"></a-entity>
+        
+          <a-entity
+          gltf-model="#hexacote"
+          position="0 0 -3"
+          rotation="0 -90 0"
+          scale="1 1 1"></a-entity>
+
+          <a-entity
+          gltf-model="#jinxcote"
+          position="0 0 -3"
+          rotation="0 -90 0"
+          scale="1 1 1"></a-entity>
+
+          <a-entity
+          gltf-model="#chair"
+          position="0 0 -3"
+          rotation="0 -90 0"
+          scale="1 1 1"></a-entity>
   
   
         <a-text 
@@ -76,19 +116,6 @@
         visible="true">
       </a-text>
   
-        <a-entity
-          gltf-model="#salle"
-          position="0 0 -3"
-          rotation="0 -90 0"
-          scale="1 1 1"></a-entity>
-  
-        <a-plane
-          src="#bg1"
-          position="0 0 -100"
-          scale="250 125 250">
-        </a-plane>
-  
-        <a-box id="blackRoom" position="0 1.6 -10" scale="4 4 4" color="black"></a-box>
   
         <a-box 
           id="interactiveShimmer"
@@ -129,6 +156,27 @@
           class="clickable"
           opacity="0">
         </a-box>
+
+        <a-text 
+    id="hexaText"
+    value="Piltover s eleve encore plus, renforcant son pouvoir avec cette technologie. Les enforcers deviennent invincibles, ecrasant toute rebellion. Mais a Zaun, une contre-technologie nait, detournant l Hextech pour lutter contre l oppression. La guerre eclate, et bientot, meme Piltover tremble sous les assauts de machines corrompues." 
+    position="-3.7 2 -1.4" 
+    rotation="0 90 0" 
+    scale=".6 .6 .6" 
+    color="#FFFFFF"
+    visible="false">
+  </a-text>
+
+  <a-box 
+          id="interactivehexabtn"
+          position="-3.6 1.4 -3.8" 
+          rotation="90 0 0" 
+          scale=".2 .5 .2" 
+          color="#70fff5"
+          class="clickable"
+          visible="false">
+        </a-box>
+
       </a-entity>
 
       <a-sky color="#000000"></a-sky>
@@ -146,6 +194,19 @@
         console.log("✅ Cubeshimmerbtn cliqué !");
         document.querySelector('#world').setAttribute('visible', false);
         document.querySelector('#cameraTextshimmer').setAttribute('visible', true);
+      });
+
+      document.querySelector('#interactiveHexa').addEventListener('click', function () {
+    console.log("✅ Cubeshimmer cliqué !");
+    document.querySelector('#choiceText').setAttribute('visible', false);
+    document.querySelector('#hexaText').setAttribute('visible', true);
+    document.querySelector('#interactivehexabtn').setAttribute('visible', true);
+  });
+
+      document.querySelector('#interactivehexabtn').addEventListener('click', function () {
+        console.log("✅ Cubeshimmerbtn cliqué !");
+        document.querySelector('#world').setAttribute('visible', false);
+        document.querySelector('#cameraTexthexa').setAttribute('visible', true);
       });
 
       document.querySelector('#interactiveHexa').addEventListener('click', function () {
