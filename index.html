@@ -8,95 +8,149 @@
   <body>
     <a-scene>
 
-      <!-- Player. -->
-      <a-entity id="rig" movement-controls="constrainToNavMesh: true; speed: 0.2">
-        <a-entity
-          camera
-          
-          position="0 1.6 0"
-          look-controls="pointerLockEnabled: true">
-          <a-cursor></a-cursor>
+      
+
+        <!-- Player. -->
+        <a-entity id="rig" movement-controls="constrainToNavMesh: true; speed: 0.2">
+          <a-entity
+            camera
+            position="0 1.6 0"
+            look-controls="pointerLockEnabled: true"
+            cursor="rayOrigin: mouse">
+            <a-cursor></a-cursor>
+              <a-text 
+                id="cameraTextshimmer"
+                value="Le pouvoir consume. Et toi, combien de temps tiendras-tu ?"
+                position="-.5 0 -1" 
+                scale="0.15 0.15 0.15"
+                color="#FFFFFF"
+                visible="false">
+              </a-text>
+          </a-entity>
+  
+          <a-entity
+            oculus-hand="hand: left"
+            laser-controls="hand: left"
+            raycaster="objects: .clickable">
+          </a-entity>
+  
+          <a-entity
+            oculus-hand="hand: right"
+            laser-controls="hand: right"
+            raycaster="objects: .clickable">
+          </a-entity>
         </a-entity>
+  
+        <a-assets>
+          <img id="bg1" src="./asset/bg/bg1.svg"></img>
+          <a-asset-item id="test" src="./asset/wizardtable.glb"></a-asset-item>
+          <a-asset-item id="salle" src="./asset/scool.glb"></a-asset-item>
+          <a-asset-item id="hexa" src="./asset/hexatex.glb"></a-asset-item>
+          <a-asset-item id="shimmer" src="./asset/shimmer.glb"></a-asset-item>
+          <a-asset-item id="flopnavmesh" src="./asset/navmesh.glb"></a-asset-item>
+        </a-assets>
 
         <a-entity
-          oculus-hand="hand: left"
-          laser-controls="hand: left"
-          raycaster="objects: .clickable">
+      id="world"
+      scale="1 1 1">
+  
+        <!-- NavMesh avec flopnavmesh -->
+        <a-entity
+          id="navmeshEntity"
+          gltf-model="#flopnavmesh"
+          nav-mesh
+          position="0 -.5 -3"
+          rotation="0 -90 0"
+          scale="1 1 1"
+          visible="false">
         </a-entity>
-
-        <a-entity
-          oculus-hand="hand: right"
-          laser-controls="hand: right"
-          raycaster="objects: .clickable">
-        </a-entity>
-      </a-entity>
-
-      <a-assets>
-        <img id="bg1" src="./asset/bg/bg1.svg"></img>
-        <a-asset-item id="test" src="./asset/wizardtable.glb"></a-asset-item>
-        <a-asset-item id="salle" src="./asset/scool.glb"></a-asset-item>
-        <a-asset-item id="hexa" src="./asset/hexatex.glb"></a-asset-item>
-        <a-asset-item id="shimmer" src="./asset/shimmer.glb"></a-asset-item>
-        <a-asset-item id="flopnavmesh" src="./asset/navmesh.glb"></a-asset-item>
-        <a-asset-item id="navmesh" src="./asset/simplemesh.glb"></a-asset-item>
-      </a-assets>
-
-      <!-- NavMesh avec flopnavmesh -->
-      <a-entity
-        id="navmeshEntity"
-        gltf-model="#flopnavmesh"
-        nav-mesh
-        position="0 -.5 -3"
-        rotation="0 -90 0"
-        scale="1 1 1"
-        visible="true">
-      </a-entity>
-
-      <!-- HEXA -->
-
-      <a-entity
-        gltf-model="#hexa"
-        position="-0.5 .75 -2.35"
-        scale=".5 .5 .5"></a-entity>
-
-      <!-- SHIMMER -->
-
-        <a-entity
-        id="shimmer"
-        gltf-model="#shimmer"
-        position="0.38 .75 -1.83"
-        scale=".5 .5 .5"
-        class="clickable">
-      </a-entity>
-
+  
+  
         <a-text 
         id="choiceText"
         value="Faite votre choix" 
         position="-0.7 2 -3" 
         rotation="0 0 0" 
         scale="1 1 1" 
-        color="#FFFFFF">
+        color="#FFFFFF"
+        visible="true">
       </a-text>
+  
+        <a-entity
+          gltf-model="#salle"
+          position="0 0 -3"
+          rotation="0 -90 0"
+          scale="1 1 1"></a-entity>
+  
+        <a-plane
+          src="#bg1"
+          position="0 0 -100"
+          scale="250 125 250">
+        </a-plane>
+  
+        <a-box id="blackRoom" position="0 1.6 -10" scale="4 4 4" color="black"></a-box>
+  
+        <a-box 
+          id="interactiveShimmer"
+          position="0.6 1.6 -2.6" 
+          rotation="0 45 0" 
+          scale=".2 .5 .2" 
+          color="#4CC3D9"
+          class="clickable"
+          opacity="0">
+        </a-box>
+  
+        <a-text 
+    id="shimmerText"
+    value="Zaun se transforme en un chaos incontrolable. Le Shimmer se repand, transformant les habitants en creatures monstrueuses et incontrolables. Piltover reagit avec brutalite, imposant un blocus total. La cite souterraine sombre dans l anarchie, ou seuls les plus forts survivent." 
+    position="4.9 2.2 -4.4" 
+    rotation="0 -90 0" 
+    scale=".6 .6 .6" 
+    color="#FFFFFF"
+    visible="false">
+  </a-text>
+  
+        <a-box 
+          id="interactiveShimmerbtn"
+          position="5 1.6 -2.4" 
+          rotation="90 0 0" 
+          scale=".2 .5 .2" 
+          color="#fe7cec"
+          class="clickable"
+          visible="false">
+        </a-box>
+  
+        <a-box 
+          id="interactiveHexa"
+          position="-.3 1.6 -2.6" 
+          rotation="0 45 0" 
+          scale=".2 .2 .2" 
+          color="#4CC3D9"
+          class="clickable"
+          opacity="0">
+        </a-box>
+      </a-entity>
 
-      <a-entity
-        gltf-model="#salle"
-        position="0 0 -3"
-        rotation="0 -90 0"
-        scale="1 1 1"></a-entity>
-
-      <a-plane
-        src="#bg1"
-        position="0 0 -100"
-        scale="250 125 250">
-      </a-plane>
-
-      <a-sky color="#1E816A"></a-sky>
+      <a-sky color="#000000"></a-sky>
     </a-scene>
 
     <script>
-      // JavaScript pour cacher le texte lors du clic
-      document.querySelector('#shimmer').addEventListener('click', function () {
-        document.querySelector('#choiceText').setAttribute('visible', 'false');
+      document.querySelector('#interactiveShimmer').addEventListener('click', function () {
+    console.log("✅ Cubeshimmer cliqué !");
+    document.querySelector('#choiceText').setAttribute('visible', false);
+    document.querySelector('#shimmerText').setAttribute('visible', true);
+    document.querySelector('#interactiveShimmerbtn').setAttribute('visible', true);
+  });
+
+  document.querySelector('#interactiveShimmerbtn').addEventListener('click', function () {
+        console.log("✅ Cubeshimmerbtn cliqué !");
+        document.querySelector('#world').setAttribute('visible', false);
+        document.querySelector('#cameraTextshimmer').setAttribute('visible', true);
+      });
+
+      document.querySelector('#interactiveHexa').addEventListener('click', function () {
+        console.log("✅ CubeHexa cliqué !");
+        document.querySelector('#choiceText').setAttribute('visible', false);
       });
     </script>
 
